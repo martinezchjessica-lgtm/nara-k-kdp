@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="dark">
-<title>Nara K · Estudio KDP</title>
+<meta name="color-scheme" content="light">
+<title>Estudio KDP</title>
 <style>
 :root{
-  --bg:#17131f; --panel:#201a2c; --panel2:#2a2238; --line:#3d3253;
-  --text:#f3eefa; --muted:#a99fbd; --accent:#f472b6; --accent-ink:#2b0d1d;
-  --ok:#86efac; --warn:#fcd34d; --err:#fca5a5;
+  --bg:#ffffff; --panel:#ffffff; --panel2:#f6f3fa; --line:#e3dcee;
+  --text:#231d30; --muted:#6a6279; --accent:#f472b6; --accent-ink:#3a0a22;
+  --ok:#15803d; --warn:#a16207; --err:#b91c1c;
 }
 *{box-sizing:border-box}
 html{background:var(--bg)}
@@ -20,8 +20,7 @@ body{
 }
 main{max-width:880px; margin:0 auto; padding:20px 16px 64px}
 header{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:6px}
-.brand{font-family:"Snell Roundhand","Segoe Script","Brush Script MT",cursive; font-size:44px; line-height:1; color:var(--accent)}
-header h1{margin:0; font-size:18px; font-weight:600; color:var(--muted)}
+header h1{margin:0; font-size:28px; font-weight:700; color:var(--text)}
 .lead{margin:4px 0 20px; color:var(--muted); max-width:60ch}
 .tabs{display:flex; gap:8px; margin-bottom:16px}
 .tab{
@@ -40,10 +39,10 @@ header h1{margin:0; font-size:18px; font-weight:600; color:var(--muted)}
 .btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
 .btn.small{padding:4px 10px; min-height:30px; font-size:13px}
 .btn:disabled{opacity:.5; cursor:not-allowed}
-.btn:focus-visible,.tab:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #fbcfe8; outline-offset:2px}
+.btn:focus-visible,.tab:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #db2777; outline-offset:2px}
 .slots{display:grid; gap:10px}
 .slot{display:flex; gap:12px; align-items:center; padding:10px; border:1px dashed var(--line); border-radius:12px}
-.slot .thumb{width:64px; height:64px; border-radius:10px; background:#fff; object-fit:contain; flex:none}
+.slot .thumb{width:64px; height:64px; border-radius:10px; background:#fff; border:1px solid var(--line); object-fit:contain; flex:none}
 .slot .thumb.empty{background:var(--panel2); display:grid; place-items:center; color:var(--muted); font-size:12px}
 .slot .meta{flex:1; min-width:0}
 .slot .meta b{display:block; font-size:15px}
@@ -82,22 +81,25 @@ input[type=number],select{
 .progress{height:10px; border-radius:999px; background:var(--bg); border:1px solid var(--line); overflow:hidden; margin:12px 0 8px}
 .progress i{display:block; height:100%; width:0; background:var(--accent)}
 .log{
-  background:#0f0c16; border:1px solid var(--line); border-radius:12px; padding:10px 12px;
+  background:var(--panel2); border:1px solid var(--line); border-radius:12px; padding:10px 12px;
   font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12.5px; max-height:220px; overflow:auto; white-space:pre-wrap;
 }
 .log .ok{color:var(--ok)} .log .warn{color:var(--warn)} .log .err{color:var(--err)}
 .result{margin-top:10px; display:none}
 .note{color:var(--muted); font-size:13px; margin:8px 0 0}
+.review{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:12px}
+.review canvas{width:100%; height:auto; border:1px solid var(--line); border-radius:12px; background:#fff; display:block; margin-top:6px}
+.review p{margin:6px 0 0; font-size:14px}
+.review .tag{font-weight:700}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
 <main>
   <header>
-    <span class="brand">Nara K</span>
-    <h1>Estudio KDP · interior y cubierta 8.5 × 8.5 pulgadas</h1>
+    <h1>Estudio KDP</h1>
   </header>
-  <p class="lead">Arma los dos PDF que pide KDP. Todo se procesa en tu navegador: tus ilustraciones no se suben a ningún servidor.</p>
+  <p class="lead">Arma los dos PDF que pide KDP, interior y cubierta de 8.5 × 8.5 pulgadas. Todo se procesa en tu navegador: tus ilustraciones no se suben a ningún servidor.</p>
 
   <div class="tabs" role="tablist">
     <button class="tab" role="tab" id="t-int" aria-selected="true" aria-controls="p-int">Interior</button>
@@ -142,7 +144,7 @@ input[type=number],select{
         <div class="stat"><b id="sScenes">0</b><span>escenas</span></div>
         <div class="stat"><b>300 dpi</b><span>sin sangría</span></div>
       </div>
-      <button class="btn primary" id="genInt" type="button">Generar NaraK_Interior_8.5x8.5.pdf</button>
+      <button class="btn primary" id="genInt" type="button">Generar Interior_8.5x8.5.pdf</button>
       <div class="result" id="resInt"></div>
     </div>
   </section>
@@ -151,8 +153,17 @@ input[type=number],select{
   <section id="p-cov" role="tabpanel" hidden>
     <div class="card">
       <h2>Imágenes</h2>
-      <p class="hint">Portada y contraportada de 8.5 × 8.5. La app las extiende hasta el área de sangrado.</p>
+      <p class="hint">Portada y contraportada de 8.5 × 8.5. La app las deja a tamaño real, sin escalar, y genera la sangría reflejando los bordes del arte.</p>
       <div class="slots" id="coverSlots"></div>
+    </div>
+
+    <div class="card">
+      <h2>Revisar bordes</h2>
+      <p class="hint">Marca en rojo lo que queda dentro de la distancia segura del borde de corte. En la contraportada también dibuja la zona del código de barras (la guía no se imprime).</p>
+      <label class="f" style="max-width:240px">Distancia segura (pulgadas)<input type="number" id="safeIn" value="0.25" min="0.1" max="0.6" step="0.05"></label>
+      <div style="margin-top:10px"><button class="btn" id="reviewBtn" type="button">Revisar bordes</button></div>
+      <div class="review" id="reviewOut"></div>
+      <p class="note">La revisión detecta líneas y formas marcadas cerca del borde. No sabe cuáles son importantes: un fondo con estrellas o patrón también saldrá marcado. La distancia de 0.25" es una regla práctica, confírmala con las guías del previsualizador de KDP.</p>
     </div>
 
     <div class="card">
@@ -183,7 +194,7 @@ input[type=number],select{
 
     <div class="card">
       <h2>Generar cubierta</h2>
-      <button class="btn primary" id="genCov" type="button">Generar NaraK_Cubierta_KDP.pdf</button>
+      <button class="btn primary" id="genCov" type="button">Generar Cubierta_KDP.pdf</button>
       <div class="result" id="resCov"></div>
     </div>
   </section>
@@ -506,7 +517,7 @@ $("#genInt").addEventListener("click", async () => {
     }
     const blob = pdf.finish();
     log("Listo: " + plan.length + " páginas, " + mb(blob.size) + ".", "ok");
-    showResult($("#resInt"), blob, "NaraK_Interior_8.5x8.5.pdf");
+    showResult($("#resInt"), blob, "Interior_8.5x8.5.pdf");
   } catch (e){ log("Error: " + e.message, "err"); }
   lock(false);
 });
@@ -548,6 +559,35 @@ function medianColor(d){
   return [m(r), m(g), m(b)];
 }
 
+const TRIM_PX = Math.round(TRIM * DPI); // 2550
+
+async function artCanvas(file){
+  const { img, url } = await loadImg(file);
+  try {
+    const ar = img.naturalWidth / img.naturalHeight;
+    if (Math.abs(ar - 1) > 0.01)
+      log("  aviso: " + file.name + " no es cuadrada (" + img.naturalWidth + "×" + img.naturalHeight + "). Se recorta al centro para llenar 8.5 × 8.5.", "warn");
+    if (Math.min(img.naturalWidth, img.naturalHeight) < TRIM_PX * 0.8)
+      log("  aviso: " + file.name + " tiene menos de 2040 px. Se verá borrosa a 300 dpi.", "warn");
+    const c = document.createElement("canvas"); c.width = c.height = TRIM_PX;
+    const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, TRIM_PX, TRIM_PX);
+    drawFit(x, img, 0, 0, TRIM_PX, TRIM_PX, "cover");
+    return c;
+  } finally { URL.revokeObjectURL(url); }
+}
+// Pone el arte a tamaño real y rellena la sangría con copias reflejadas de sus propios bordes.
+function placeArt(ctx, art, x0, y0, sides){
+  const w = art.width, h = art.height;
+  const mir = (rx, ry, fx, fy) => {
+    ctx.save(); ctx.translate(rx + (fx ? w : 0), ry + (fy ? h : 0)); ctx.scale(fx ? -1 : 1, fy ? -1 : 1);
+    ctx.drawImage(art, 0, 0); ctx.restore();
+  };
+  mir(x0, y0 - h, false, true); mir(x0, y0 + h, false, true);
+  if (sides.right){ mir(x0 + w, y0, true, false); mir(x0 + w, y0 - h, true, true); mir(x0 + w, y0 + h, true, true); }
+  if (sides.left){ mir(x0 - w, y0, true, false); mir(x0 - w, y0 - h, true, true); mir(x0 - w, y0 + h, true, true); }
+  ctx.drawImage(art, x0, y0);
+}
+
 $("#genCov").addEventListener("click", async () => {
   if (busy) return;
   resetLog(); $("#resCov").style.display = "none";
@@ -557,25 +597,27 @@ $("#genCov").addEventListener("click", async () => {
   if (d.pages !== null && (d.pages < 24 || d.pages > 828)) log("KDP acepta de 24 a 828 páginas. Tienes " + d.pages + ".", "warn");
   lock(true); setProgress(5);
   try {
-    const pxW = Math.round(d.W * DPI), pxH = Math.round(d.H * DPI);
-    const backW = Math.round((BLEED + TRIM) * DPI), spinePx = Math.round(d.spine * DPI);
-    const frontX = backW + spinePx, frontW = pxW - frontX;
-    log("Lienzo " + pxW + "×" + pxH + " px · lomo " + d.spine.toFixed(3) + '"');
+    const pxW = Math.round(d.W * DPI), pxH = Math.round(d.H * DPI), bleedPx = Math.round(BLEED * DPI);
+    const y0 = Math.round((pxH - TRIM_PX) / 2);
+    const backX = bleedPx, spineX = backX + TRIM_PX, frontX = pxW - bleedPx - TRIM_PX;
+    const spinePx = frontX - spineX;
+    if (spinePx <= 0) throw new Error("El lomo calculado no es válido.");
+    log("Lienzo " + pxW + "×" + pxH + " px · lomo " + d.spine.toFixed(3) + '" (' + spinePx + " px)");
     const c = document.createElement("canvas"); c.width = pxW; c.height = pxH;
     const ctx = c.getContext("2d", { willReadFrequently: true });
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, pxW, pxH);
 
-    const back = await loadImg(state.cover.back.file); setProgress(25);
-    drawFit(ctx, back.img, 0, 0, backW, pxH, "cover"); URL.revokeObjectURL(back.url);
-    const front = await loadImg(state.cover.front.file); setProgress(45);
-    drawFit(ctx, front.img, frontX, 0, frontW, pxH, "cover"); URL.revokeObjectURL(front.url);
-    log("Portada y contraportada extendidas hasta el sangrado.");
+    const back = await artCanvas(state.cover.back.file); setProgress(30);
+    placeArt(ctx, back, backX, y0, { left: true }); back.width = 0;
+    const front = await artCanvas(state.cover.front.file); setProgress(50);
+    placeArt(ctx, front, frontX, y0, { right: true }); front.width = 0;
+    log("Arte a tamaño real. Sangría generada reflejando los bordes.");
 
-    const cb = medianColor(ctx.getImageData(backW - 3, 0, 3, pxH).data);
-    const cf = medianColor(ctx.getImageData(frontX, 0, 3, pxH).data);
+    const cb = medianColor(ctx.getImageData(spineX - 3, y0, 3, TRIM_PX).data);
+    const cf = medianColor(ctx.getImageData(frontX, y0, 3, TRIM_PX).data);
     const sp = cb.map((v, i) => Math.round((v + cf[i]) / 2));
     ctx.fillStyle = "rgb(" + sp.join(",") + ")";
-    ctx.fillRect(backW, 0, spinePx, pxH);
+    ctx.fillRect(spineX, 0, spinePx, pxH);
     log("Lomo en color sólido rgb(" + sp.join(", ") + ") tomado de los bordes.");
     setProgress(65); await nextTick();
 
@@ -584,9 +626,111 @@ $("#genCov").addEventListener("click", async () => {
     pdf.addPage(d.W * 72, d.H * 72, pdf.addImage(im));
     const blob = pdf.finish(); setProgress(100);
     log("Listo: " + d.W.toFixed(3) + '" × ' + d.H.toFixed(3) + '", ' + mb(blob.size) + ".", "ok");
-    showResult($("#resCov"), blob, "NaraK_Cubierta_KDP.pdf");
+    showResult($("#resCov"), blob, "Cubierta_KDP.pdf");
   } catch (e){ log("Error: " + e.message, "err"); }
   lock(false);
+});
+
+/* ---------- revisión de bordes ---------- */
+async function analyzeEdges(file, side, safeIn){
+  const N = 600;
+  const { img, url } = await loadImg(file);
+  const c = document.createElement("canvas"); c.width = c.height = N;
+  const x = c.getContext("2d", { willReadFrequently: true });
+  x.fillStyle = "#fff"; x.fillRect(0, 0, N, N);
+  drawFit(x, img, 0, 0, N, N, "cover"); URL.revokeObjectURL(url);
+  const d = x.getImageData(0, 0, N, N).data;
+  const flag = new Uint8Array(N * N);
+  const band = Math.max(2, Math.round(safeIn / TRIM * N));
+  const med = a => { a.sort((u, v) => u - v); return a[a.length >> 1]; };
+  const TH = 60;
+  // Franja de un borde: compara cada píxel con el color de fondo local (mediana de la franja en una ventana).
+  const bandFrac = idxAt => {
+    const prof = [];
+    for (let t = 0; t < N; t++){
+      const r = [], g = [], b = [];
+      for (let k = 0; k < band; k++){ const i = idxAt(t, k) * 4; r.push(d[i]); g.push(d[i + 1]); b.push(d[i + 2]); }
+      prof.push([med(r), med(g), med(b)]);
+    }
+    let n = 0;
+    for (let t = 0; t < N; t++){
+      const lo = Math.max(0, t - 60), hi = Math.min(N - 1, t + 60);
+      const base = [0, 1, 2].map(ch => med(prof.slice(lo, hi + 1).map(v => v[ch])));
+      for (let k = 0; k < band; k++){
+        const idx = idxAt(t, k), i = idx * 4;
+        if (Math.abs(d[i] - base[0]) + Math.abs(d[i + 1] - base[1]) + Math.abs(d[i + 2] - base[2]) > TH){ flag[idx] = 1; n++; }
+      }
+    }
+    return n / (N * band);
+  };
+  const outerIdx = side === "front" ? (t, k) => t * N + (N - 1 - k) : (t, k) => t * N + k;
+  const zw = Math.round(2.5 / TRIM * N), zh = Math.round(1.7 / TRIM * N);
+  const zoneFrac = () => {
+    const r = [], g = [], b = [];
+    for (let yy = N - zh; yy < N; yy++) for (let xx = N - zw; xx < N; xx++){ const i = (yy * N + xx) * 4; r.push(d[i]); g.push(d[i + 1]); b.push(d[i + 2]); }
+    const base = [med(r.slice()), med(g.slice()), med(b.slice())];
+    let n = 0;
+    for (let yy = N - zh; yy < N; yy++) for (let xx = N - zw; xx < N; xx++){
+      const idx = yy * N + xx, i = idx * 4;
+      if (Math.abs(d[i] - base[0]) + Math.abs(d[i + 1] - base[1]) + Math.abs(d[i + 2] - base[2]) > TH){ flag[idx] = 1; n++; }
+    }
+    return n / (zw * zh);
+  };
+  const res = {
+    top: bandFrac((t, k) => k * N + t),
+    bottom: bandFrac((t, k) => (N - 1 - k) * N + t),
+    outer: bandFrac(outerIdx),
+    zone: side === "back" ? zoneFrac() : null
+  };
+  // vista con marcas
+  const o = document.createElement("canvas"); o.width = o.height = N;
+  const ox = o.getContext("2d"); ox.drawImage(c, 0, 0);
+  ox.fillStyle = "rgba(220,38,38,0.9)";
+  const paint = (rx, ry, w, h) => { for (let yy = ry; yy < ry + h; yy++) for (let xx = rx; xx < rx + w; xx++) if (flag[yy * N + xx]) ox.fillRect(xx - 1, yy - 1, 3, 3); };
+  const outerX = side === "front" ? N - band : 0;
+  paint(0, 0, N, band); paint(0, N - band, N, band); paint(outerX, 0, band, N);
+  if (side === "back") paint(N - zw, N - zh, zw, zh);
+  ox.lineWidth = 2; ox.setLineDash([8, 6]); ox.strokeStyle = "#0891b2";
+  ox.beginPath();
+  ox.moveTo(0, band); ox.lineTo(N, band); ox.moveTo(0, N - band); ox.lineTo(N, N - band);
+  const lx = side === "front" ? N - band : band; ox.moveTo(lx, 0); ox.lineTo(lx, N); ox.stroke();
+  if (side === "back"){
+    ox.strokeStyle = "#c026d3"; ox.strokeRect(N - zw, N - zh, zw, zh);
+    ox.setLineDash([]); ox.lineWidth = 3;
+    const bw = Math.round(2 / TRIM * N), bh = Math.round(1.2 / TRIM * N), m = Math.round(0.25 / TRIM * N);
+    ox.fillStyle = "rgba(255,255,255,0.8)"; ox.fillRect(N - m - bw, N - m - bh, bw, bh);
+    ox.strokeRect(N - m - bw, N - m - bh, bw, bh);
+    ox.fillStyle = "#86198f"; ox.font = "bold 15px system-ui,sans-serif"; ox.textAlign = "center";
+    ox.fillText("código de barras", N - m - bw / 2, N - m - bh / 2 + 5);
+  }
+  return { canvas: o, res };
+}
+function edgeLine(label, f){
+  const p = document.createElement("p");
+  const t = document.createElement("span"); t.className = "tag"; t.textContent = label + ": ";
+  const bad = f > 0.015;
+  const v = document.createElement("span"); v.style.color = bad ? "var(--warn)" : "var(--ok)";
+  v.textContent = bad ? "hay elementos marcados (" + (f * 100).toFixed(1) + "% de la franja)" : "limpio";
+  p.append(t, v); return p;
+}
+$("#reviewBtn").addEventListener("click", async () => {
+  const out = $("#reviewOut"); out.innerHTML = "";
+  const safeIn = +$("#safeIn").value || 0.25;
+  const items = [["front", "Portada"], ["back", "Contraportada"]].filter(([k]) => state.cover[k]);
+  if (!items.length){ out.textContent = "Carga la portada o la contraportada primero."; return; }
+  $("#reviewBtn").disabled = true;
+  try {
+    for (const [k, name] of items){
+      const { canvas, res } = await analyzeEdges(state.cover[k].file, k, safeIn);
+      const box = document.createElement("div");
+      const h = document.createElement("b"); h.textContent = name;
+      box.append(h, canvas, edgeLine("Borde superior", res.top), edgeLine("Borde inferior", res.bottom),
+        edgeLine(k === "front" ? "Borde exterior (derecha)" : "Borde exterior (izquierda)", res.outer));
+      if (res.zone !== null) box.append(edgeLine("Zona del código de barras", res.zone));
+      out.appendChild(box);
+    }
+  } catch (e){ out.textContent = "Error: " + e.message; }
+  $("#reviewBtn").disabled = false;
 });
 
 /* ---------- pestañas ---------- */
